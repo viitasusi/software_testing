@@ -17,6 +17,13 @@ describe('isEmpty Function - Product Form Validation', () => {
     expect(isEmpty('')).toBe(true); // Empty string should be treated as empty
   });
 
+  // Test when mandatory fields are filled
+  test('returns false when mandatory fields are filled', () => {
+    expect(isEmpty('Product name')).toBe(false); // Non-empty mandatory field (string)
+    expect(isEmpty([1, 2, 3])).toBe(false); // Non-empty mandatory field (array)
+    expect(isEmpty({name: 'Product'})).toBe(false); // Non-empty mandatory field (object)
+  });
+
   // Test for empty objects, arrays, or non-object values
   test('returns true for empty objects, arrays, or non-object values', () => {
     expect(isEmpty({})).toBe(true); // Empty object should be treated as empty
@@ -25,8 +32,3 @@ describe('isEmpty Function - Product Form Validation', () => {
     expect(isEmpty(undefined)).toBe(true); // Undefined should be treated as empty
   });
 });
-
-
-
-
-
