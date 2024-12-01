@@ -2,7 +2,7 @@ export default {
   transform: {
     '^.+\\.js$': 'esbuild-jest', // Use esbuild for transforming JavaScript
   },
-  testEnvironment: 'node', // Make sure to use Node environment for testing
+  testEnvironment: 'node', // Use Node environment for testing
   collectCoverage: true, // Ensure coverage is enabled
   coverageReporters: ['lcov', 'text'],
   testPathIgnorePatterns: [
@@ -13,4 +13,19 @@ export default {
     "/node_modules/",
     "/.internal/" // Exclude the .internal directory from coverage
   ],
+  reporters: [
+    "default",
+    [
+      "jest-stare",
+      {
+        resultDir: "coverage/jest-stare",
+        reportTitle: "jest-stare!",
+        additionalResultsProcessors: ["jest-junit"],
+        coverageLink: "../../coverage/lcov-report/index.html",
+        jestStareConfigJson: "jest-stare.json",
+        jestGlobalConfigJson: "globalStuff.json"
+      }
+    ]
+  ]
 };
+
