@@ -10,6 +10,11 @@ describe('reduce', () => {
     expect(reduce(floatArray, (sum, n) => sum + n, 0)).toBeCloseTo(1.0);
   });
 
+  test('handles strings as collections', () => {
+    const result = reduce("hello", (acc, char) => acc + char.toUpperCase(), "");
+    expect(result).toBe("HELLO");
+  });
+
   test('reduces with and without initial value', () => {
     expect(reduce([1, 2, 3], (product, n) => product * n)).toBe(6);
     expect(reduce([1, 2, 3], (product, n) => product * n, 0)).toBe(0);
@@ -21,6 +26,10 @@ describe('reduce', () => {
 
   test('returns undefined for empty array without initial value', () => {
     expect(reduce([], (sum, n) => sum + n)).toBeUndefined();
+  });
+
+  test('returns undefined for non-iterable input', () => {
+    expect(reduce(10, () => {})).toBeUndefined();
   });
 
   test('reduces an object to a grouped result', () => {
